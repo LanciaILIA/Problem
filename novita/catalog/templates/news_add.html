@@ -1,0 +1,29 @@
+{% extends "default.html" %}
+{% block content %}
+
+<hЗ>Список статей в БД</hЗ>
+    <table>
+        <thead><th>Id</th><th>Название</th><th>Текст</thead>
+    {% if post %}
+        {% for post in post.all %}
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.name}}</td>
+                <td>{{post.title}}</td>
+                <td><a href="/news/{{post.id}}/update">Измeнить</a>
+                    <a href="/delete/{{post.id}}">Yдaлить</a></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <р>В базе данных нет статей</р>
+    {% endif %}
+    </table>
+<hЗ>Добавить в БД статью</hЗ>
+<form method="POST" action="/create/">
+        {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" vаluе="Сохранить" >
+</form>
+{% endblock %}
