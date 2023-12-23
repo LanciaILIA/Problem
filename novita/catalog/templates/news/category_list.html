@@ -1,0 +1,31 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+<hЗ>Список категорий</hЗ>
+    <table>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Категории
+            </td>
+        </tr>
+    {% if post %}
+        {% for post in category_news_list %}
+            <tr>
+                <td>{{post.id}}</td>
+                <td>{{post.name}}</td>
+                <td>
+                    {% for category in post.category.all %}
+                        <a href="{% url 'category_list' category.id %}">{{ category }}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <р>В базе данных нет категорий</р>
+    {% endif %}
+    </table>
+{% endblock %}
